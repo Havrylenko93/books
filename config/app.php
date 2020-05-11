@@ -162,7 +162,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\ApiResponseMacrosServiceProvider::class
+        App\Providers\ApiResponseMacrosServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 

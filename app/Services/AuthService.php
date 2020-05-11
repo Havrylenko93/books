@@ -6,6 +6,7 @@ use App\Exceptions\InvalidPasswordException;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\AuthServiceInterface;
+use JWTAuth;
 
 class AuthService implements AuthServiceInterface
 {
@@ -42,7 +43,8 @@ class AuthService implements AuthServiceInterface
         if (!password_verify($credentials['password'], $user->password)) {
             throw new InvalidPasswordException();
         }
-        $user['access_token'] = $this->makeTokenForUser($user);
+
+        $user['access_token'] = JWTAuth::fromUser($user);
 
         return $user;
     }
