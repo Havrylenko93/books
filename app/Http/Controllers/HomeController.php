@@ -2,27 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Interfaces\AuthorServiceInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var AuthorServiceInterface
      */
-    public function __construct()
+    protected $authorService;
+
+    /**
+     * HomeController constructor.
+     * @param AuthorServiceInterface $authorService
+     */
+    public function __construct(AuthorServiceInterface $authorService)
     {
         $this->middleware('auth');
+
+        $this->authorService = $authorService;
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('home');
+        $authors = $this->authorService->all();
+
+        return view('home', compact('authors'));
     }
 }
