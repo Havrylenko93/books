@@ -1,4 +1,4 @@
-##books
+##books (5.6 was chosen only for Nova)
 
 **Postman documentation:**
 
