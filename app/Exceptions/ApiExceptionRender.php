@@ -66,11 +66,19 @@ class ApiExceptionRender
         return response()->json($data, \Symfony\Component\HttpFoundation\Response::HTTP_UNAUTHORIZED);
     }
 
+    /**
+     * @param \Exception $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function invalidPasswordException(\Exception $exception)
     {
         return $this->default($exception);
     }
 
+    /**
+     * @param \Exception $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function authorizationException(\Exception $exception)
     {
         $data = [
@@ -81,5 +89,14 @@ class ApiExceptionRender
         ];
 
         return response()->json($data, \Symfony\Component\HttpFoundation\Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @param \Exception $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unauthorizedHttpException(\Exception $exception)
+    {
+        return $this->authorizationException($exception);
     }
 }

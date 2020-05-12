@@ -9,6 +9,19 @@ class BookPolicy
 {
     use HandlesAuthorization;
 
+    public function create(User $user): bool
+    {
+        return $user->approved_for_editing;
+    }
+
+    /**
+     * @return bool
+     */
+    public function view()
+    {
+        return true;
+    }
+
     /**
      * @param User $user
      * @return bool
@@ -22,8 +35,10 @@ class BookPolicy
      * @param User $user
      * @return bool
      */
-    public function destroy(User $user): bool
+    public function delete(User $user): bool
     {
         return $user->approved_for_editing;
     }
+
+
 }

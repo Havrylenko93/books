@@ -21,7 +21,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('', 'Api\V1\BookController@index')->name('index');
             Route::get('{book}', 'Api\V1\BookController@get')->where('book', '[0-9]+')->name('get');
             Route::put('{book}', 'Api\V1\BookController@update')->where('book', '[0-9]+')->middleware('can:update,App\Models\Book')->name('update');
-            Route::delete('{book}', 'Api\V1\BookController@destroy')->where('book', '[0-9]+')->middleware('can:destroy,App\Models\Book')->name('delete');
+            Route::delete('{book}', 'Api\V1\BookController@destroy')->where('book', '[0-9]+')->middleware('can:delete,App\Models\Book')->name('delete');
         });
     });
 });
